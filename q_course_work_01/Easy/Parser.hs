@@ -9,11 +9,11 @@ import Text.Parsec.String
 
 instance Show Expr where
     show (Var var) = var
-    show (Var var :@ b@(e1 :@ e2)) = var ++ " (" ++ show b ++ ")"
     show (a@(e1 :@ e2) :@ Var var) = "(" ++ show a ++ ") " ++ var
-    show ((Lam var body) :@ (Lam var1 body1)) = "(" ++ "\\" ++ var ++ " -> " ++ show body ++ ")" ++ " " ++ "(" ++ "\\" ++ var ++ " -> " ++ show body ++ ")"
-    show ((Lam var body) :@ e2) = "(" ++ "\\" ++ var ++ " -> " ++ show body ++ ")" ++ " " ++ show e2
-    show (e1 :@ (Lam var body)) = show e1 ++ " " ++ "(" ++ "\\" ++ var ++ " -> " ++ show body ++ ")"
+    show (Var var :@ b@(e1 :@ e2)) = var ++ " (" ++ show b ++ ")"
+    show (a@(Lam var body) :@ b@(Lam var1 body1)) = "(" ++ show a ++ ")" ++ " " ++ "(" ++ show b ++ ")"
+    show (a@(Lam var body) :@ e2) = "(" ++ show a ++ ")" ++ " " ++ show e2
+    show (e1 :@ b@(Lam var body)) = show e1 ++ " " ++ "(" ++ show b ++ ")"
     show (e1 :@ e2) = show e1 ++ " " ++ show e2
     show (Lam var body) = "\\" ++ var ++ " -> " ++ show body
 
