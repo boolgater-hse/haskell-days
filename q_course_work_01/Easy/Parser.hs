@@ -57,4 +57,4 @@ instance Read Expr where
                 pure (foldr Lam expr vars)
 
             parseTerm :: String -> Either ParseError Expr
-            parseTerm = parse term " "
+            parseTerm = parse term "Error while parsing. Example: \"\\x1 x2 -> x1 (x2 x2)\""

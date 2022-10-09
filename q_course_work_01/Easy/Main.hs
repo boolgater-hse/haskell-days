@@ -71,14 +71,7 @@ reduceOnce expr
     | normal expr = Nothing
     | otherwise = Just reduced
     where
-        helper :: Expr -> Expr
-        helper var@(Var _) = var
-        helper ((Lam var body) :@ e2) = subst var e2 body
-        helper (e1 :@ e2)
-            | normal e1 = e1 :@ helper e2
-            | otherwise = helper e1 :@ e2
-        helper (Lam var body) = Lam var (helper body)
-        reduced = helper expr
+        reduced = reduceOnce' expr
 
 reduceOnce' :: Expr -> Expr
 reduceOnce' var@(Var _) = var
