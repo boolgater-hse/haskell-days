@@ -1,3 +1,8 @@
+type Board = Int
+
+next :: Board -> [Board]
+next = undefined
+
 doNTurns :: Int -> Board -> [Board]
 doNTurns 0 ini = [ini]
 doNTurns n ini = do
